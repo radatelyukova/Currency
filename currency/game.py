@@ -37,13 +37,17 @@ class Game():
     
     def reply(self):
         answer = self.gui_object.reply_box.get().strip().lower()
+        message  = '\nВаш ответ: ' + self.current_country + ' - ' + answer
+        
         if (answer == self.currency.valuta[self.current_country]):
             self.scores += 1
-            self.gui_object.result_box.insert(END, '\nПравильно')
+            message += '  ... Правильно!'
+            tag = 'correct'
         else:
-            text = '\nНеверно! Правильный ответ: ' + self.currency.valuta[self.current_country]
-            self.gui_object.result_box.insert(END, text)  
-            
+            message = '\nНеверно! Правильный ответ: ' + self.currency.valuta[self.current_country]
+            tag = 'incorrect'
+        
+        self.gui_object.result_box.insert(END, message, tag)
         self.lap()
     
     def report(self):
@@ -53,7 +57,7 @@ class Game():
         elif (self.scores < 10): text = '\nТы крут! 5'    
         else:                text = '\nТЫ ГЕНИЙ!!! 5+'        
     
-        self.gui_object.result_box.insert(END, text)
+        self.gui_object.result_box.insert(END, text, 'result')
         self.gui_object.button_reply.config(state=DISABLED)
         self.gui_object.button_start.config(state=NORMAL)
         
@@ -65,6 +69,9 @@ class Game():
         
         if (self.gui_object is None):
             self.gui_object = gui_object
+            self.gui_object.result_box.tag_config("correct",   foreground='darkgreen')
+            self.gui_object.result_box.tag_config("incorrect", foreground='red')
+            self.gui_object.result_box.tag_config("result",    foreground='blue', background='pink')
         
         gui_object.result_box.delete(1.0, END)
         gui_object.question_box.delete(1.0, END)
