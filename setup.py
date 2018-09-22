@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup (
        name='Currency',
-       version='0.1',
+       version='1.0',
        packages=find_packages(),
 
        # Declare your packages' dependencies here, for eg:
@@ -16,7 +16,7 @@ setup (
        #summary = 'Just another Python package for the cheese shop',
        url='dummy.com',
        license='MIT',
-       long_description='The game to guess currency',
+       long_description='The game to guess currency of a country',
 
        # could also include long_description, download_url, classifiers, etc.
 

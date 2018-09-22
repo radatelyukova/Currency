@@ -71,7 +71,5 @@ class Game():
         gui_object.reply_box.delete(0, END)
         gui_object.button_start.config(state=DISABLED)
         gui_object.button_reply.config(state=NORMAL)
-
-
         
         self.lap()
